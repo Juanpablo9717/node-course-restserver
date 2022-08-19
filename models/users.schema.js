@@ -33,8 +33,8 @@ const UserScheme = Schema({
 });
 
 UserScheme.methods.toJSON = function() {
-  const { __v, password, ...user } = this.toObject();
-  return user;
+  const { __v, password, _id, ...user} = this.toObject();
+  return {...user, uid: _id};
 }
 
 // Este es un método de mongoose https://mongoosejs.com/docs/api.html#document_Document-toObject

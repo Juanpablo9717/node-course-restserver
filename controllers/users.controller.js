@@ -52,19 +52,8 @@ const usersPut = async (req, res) => {
     rest.password = bcryptjs.hashSync(password, salt);
   }
 
-  // busca el id en la bse de datos y lo actualiza con los datos entrantes
-
+  // Find by ID un DB and then replace it with the new state
   const user = await User.findByIdAndUpdate(id, rest, { new: true });
-
-  res.json(user);
-};
-
-const usersDelete = async (req, res) => {
-  const id = req.params.id;
-
-  const user = await User.findByIdAndUpdate(id, {state: false}, { new: true});
-  // Existe un metodo findByIdAndDelete pero este elimina fisicamente el elemento de la bse de datos
-  // Con este metodo actualizamos el elemento y no lo eliminamos, solo cambiamos la visibilidad
 
   res.json(user);
 };
@@ -73,6 +62,19 @@ const usersPatch = async (req, res) => {
   res.json({
     msg: 'patch API',
   });
+};
+
+const usersDelete = async (req, res) => {
+  const id = req.params.id;
+
+  const user = await User.findByIdAndUpdate(id, {state: false}, { new: true});
+
+  // const userAuth = req.user // <-- user authenticated
+
+  // Existe un metodo findByIdAndDelete pero este elimina fisicamente el elemento de la bse de datos
+  // Con este metodo actualizamos el elemento y no lo eliminamos, solo cambiamos la visibilidad
+
+  res.json(user);
 };
 
 module.exports = {
