@@ -4,7 +4,7 @@ const {
   validateFields,
   validateJWT,
   hasRole,
-  validateAdminRole,
+  // validateAdminRole,
 } = require("../middlewares");
 
 const {

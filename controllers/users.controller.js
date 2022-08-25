@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const { response, request } = require('express');
 const bcryptjs = require('bcryptjs');
 
