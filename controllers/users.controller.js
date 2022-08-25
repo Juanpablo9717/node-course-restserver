@@ -2,7 +2,7 @@
 const { response, request } = require('express');
 const bcryptjs = require('bcryptjs');
 
-const User = require('../models/users.schema');
+const User = require('../models/user.schema');
 
 const usersGet = async (req = request, res = response) => {
   const { limit = 5, from = 0 } = req.query;
@@ -16,7 +16,7 @@ const usersGet = async (req = request, res = response) => {
   // Este codigo comentado es bloqueando, significa que cuando se ejecuta el controlador
   // este espera la respues de cada await para seguir con la otra consulta
 
-  // esto se resuelve con Primise.all(); ya que la primer respuesta no depende de la segunda
+  // esto se resuelve con Promise.all(); ya que la primer respuesta no depende de la segunda
 
 
   const [ total, users ] = await Promise.all([
