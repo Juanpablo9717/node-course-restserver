@@ -1,5 +1,9 @@
 const { Router } = require('express')
-const { validateJWT, validateFields, validateAdminRole } = require('../middlewares')
+const {
+  validateJWT,
+  validateFields,
+  validateAdminRole,
+} = require('../middlewares')
 const { check } = require('express-validator')
 const { existCategory } = require('../helpers/db-validators')
 
@@ -21,10 +25,10 @@ router.get(
     check('from', 'The from value must be a number').optional().isNumeric(),
     validateFields,
   ],
-  [getCategories]
+  getCategories
 )
 
-// get category by id - public
+// Get category by id - public
 router.get(
   '/:id',
   [
