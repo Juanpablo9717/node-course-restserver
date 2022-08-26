@@ -32,7 +32,7 @@ const getProducts = async (req = request, res = response) => {
   try {
     const { limit = 5, from = 0 } = req.query
 
-    const [total, categories] = await Promise.all([
+    const [total, products] = await Promise.all([
       Product.countDocuments({ state: true }),
       Product.find({ state: true })
         .populate('category', 'name')
@@ -41,7 +41,7 @@ const getProducts = async (req = request, res = response) => {
         .limit(Number(limit)),
     ])
 
-    res.json({ total, categories })
+    res.json({ total, products })
   } catch (error) {
     console.log('Error getting products: ', error)
   }
