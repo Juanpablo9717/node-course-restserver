@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 const { Schema, model } = require('mongoose');
 
 const UserScheme = Schema({
