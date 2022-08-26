@@ -9,15 +9,26 @@ const uploadFile = (req, res = response) => {
 
   const { file } = req.files
   // dirname llega hasta el controller, con el segundo parametro se sale hacia atras
-  const uploadPath = path.join(__dirname, '../uploads/', file.name)
+  const extension = file.name.split('.').pop()
 
-  file.mv(uploadPath, (err) => {
-    if (err) {
-      return res.status(500).json({ err })
-    }
+  const validExtensions = ['png', 'jpg', 'jpeg', 'gif']
 
-    res.json({ msg: 'File uploaded to ' + uploadPath })
-  })
+  if (!validExtensions.includes(extension)) {
+    return res.status(400).json({
+      msg: `Extension ${extension} not valid, ${validExtensions} `
+    })
+  }
+
+  res.json({ extension})
+  // const uploadPath = path.join(__dirname, '../uploads/', file.name)
+
+  // file.mv(uploadPath, (err) => {
+  //   if (err) {
+  //     return res.status(500).json({ err })
+  //   }
+
+  //   res.json({ msg: 'File uploaded to ' + uploadPath })
+  // })
 }
 
 module.exports = {
