@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const { dbConnection } = require('../database/config.db');
+const fileUpload = require('express-fileupload');
 
 class Server {
   constructor() {
@@ -12,6 +13,7 @@ class Server {
       categories:     '/api/categories',
       products:       '/api/products',
       search:         '/api/search',
+      uploads:        '/api/uploads',
       users:          '/api/users',
     }
 
@@ -38,6 +40,13 @@ class Server {
 
     // Public Folder
     this.app.use(express.static('public'));
+
+    // File Upload
+    this.app.use(fileUpload({
+      useTempFiles : true,
+      tempFileDir : '/tmp/',
+      createParentPath : true, // <-- If the folder doesn't exist, with this atribute will be created.
+  }));
   }
 
   routes() {
@@ -45,6 +54,7 @@ class Server {
     this.app.use(this.paths.categories,   require('../routes/categories.routes'));
     this.app.use(this.paths.products,     require('../routes/products.routes'));
     this.app.use(this.paths.search,       require('../routes/search.routes'));
+    this.app.use(this.paths.uploads,      require('../routes/uploads.routes'));
     this.app.use(this.paths.users,        require('../routes/users.routes'));
   }
 
