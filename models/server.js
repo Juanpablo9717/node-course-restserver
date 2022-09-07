@@ -44,7 +44,8 @@ class Server {
     // File Upload
     this.app.use(fileUpload({
       useTempFiles : true,
-      tempFileDir : '/tmp/'
+      tempFileDir : '/tmp/',
+      createParentPath : true, // <-- If the folder doesn't exist, with this atribute will be created.
   }));
   }
 
